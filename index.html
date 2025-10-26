@@ -140,6 +140,8 @@ Happy Birthday Saniya ✨✨
   <img src="photo1.jpg" alt="Saniya photo 1">
   <img src="photo2.jpg" alt="Saniya photo 2">
 </div>
+
+
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
@@ -153,11 +155,13 @@ function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
     height: '0',
     width: '0',
-    videoId: 'dmrJU4QP2Gc', // The Video ID from the URL
+    // *** CHANGED: Using official lyric video ID ***
+    videoId: 'cvUAzpn48xA', 
     playerVars: {
       'autoplay': 0,      // Can't autoplay, will play on click
       'controls': 0,      // No controls
-      'start': 81,        // Start at 1 min 21 sec (81 seconds)
+      // *** CHANGED: Start at 1 min 22 sec (82 seconds) ***
+      'start': 82,        
       'disablekb': 1,     // Disable keyboard
       'iv_load_policy': 3 // Hide annotations
     },
@@ -174,7 +178,8 @@ function onPlayerReady(event) {
 
 function onPlayerStateChange(event) {
   if (event.data == YT.PlayerState.ENDED) {
-    player.seekTo(81, true); // Loop back to 1:21 and play again
+    // *** CHANGED: Loop back to 1:22 ***
+    player.seekTo(82, true); 
   }
 }
 // --- End of YouTube Player Code ---
@@ -189,7 +194,7 @@ for(let i=0;i<80;i++){
   sparkles.appendChild(s);
 }
 
-// MODIFIED click event
+// Click event
 envelope.addEventListener("click",()=>{
   if (player && typeof player.playVideo === 'function') {
     player.playVideo();
