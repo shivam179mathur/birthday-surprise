@@ -5,93 +5,110 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Happy Birthday Saniya 💖</title>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-  body{
-    background:#000;
-    overflow:hidden;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-  }
-  .spark-text{
-    font-size:2rem;
-    color:#ffb6ea;
-    text-align:center;
-    animation:spark 2s infinite alternate;
-  }
-  @keyframes spark{
-    from{text-shadow:0 0 5px #ff66c4,0 0 10px #ff99dd;}
-    to{text-shadow:0 0 20px #ffb6ea,0 0 40px #ff66c4;}
-  }
-
-  .envelope{
-    position:relative;
-    width:250px;
-    height:150px;
-    background:#ff66c4;
-    margin-top:30px;
-    border-radius:10px;
-    cursor:pointer;
-    transition:transform 1s ease;
-  }
-  .flap{
-    position:absolute;
-    width:100%;
-    height:100%;
-    background:#ff99dd;
-    clip-path:polygon(0 0,100% 0,50% 50%);
-    transition:transform 1s ease;
-    transform-origin:top;
-  }
-  .envelope.open .flap{transform:rotateX(180deg);}
-  .sparkles{
-    position:fixed;
-    width:100%;
-    height:100%;
-    pointer-events:none;
-    overflow:hidden;
-    z-index:-1;
-  }
-  .sparkle{
-    position:absolute;
-    width:2px;height:2px;
-    background:#ffb6ea;
-    opacity:0.8;
-    border-radius:50%;
-    animation:fall 4s linear infinite;
-  }
-  @keyframes fall{
-    0%{transform:translateY(-10px) scale(1);}
-    100%{transform:translateY(100vh) scale(0);}
-  }
-  #content{
-    display:none;
-    flex-direction:column;
-    align-items:center;
-    background:#ffe6f5;
-    min-height:100vh;
-    overflow-y:auto;
-    padding:20px;
-  }
-  #content img,#content video{
-    max-width:90%;
-    border-radius:12px;
-    margin:10px 0;
-  }
-  #message{
-    font-size:1.2rem;
-    color:#ff3399;
-    text-align:center;
-    margin:15px;
-    animation:spark 2s infinite alternate;
-  }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{
+  background:#000;
+  overflow:hidden;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+.spark-text{
+  font-size:2rem;
+  color:#ffb6ea;
+  text-align:center;
+  animation:spark 2s infinite alternate;
+  margin-bottom:15px;
+}
+@keyframes spark{
+  from{text-shadow:0 0 5px #ff66c4,0 0 10px #ff99dd;}
+  to{text-shadow:0 0 20px #ffb6ea,0 0 40px #ff66c4;}
+}
+.envelope{
+  position:relative;
+  width:250px;
+  height:150px;
+  background:#ff66c4;
+  border-radius:10px;
+  cursor:pointer;
+  transition:transform 1s ease;
+}
+.flap{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:#ff99dd;
+  clip-path:polygon(0 0,100% 0,50% 50%);
+  transform-origin:top;
+  transition:transform 1s ease;
+}
+.envelope.open .flap{transform:rotateX(180deg);}
+.label{
+  color:#fff;
+  text-align:center;
+  font-weight:600;
+  margin-bottom:8px;
+  font-size:1.2rem;
+  letter-spacing:1px;
+}
+.subtext{
+  color:#ffd6f5;
+  text-align:center;
+  margin-bottom:15px;
+  font-size:1rem;
+}
+.sparkles{
+  position:fixed;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:-1;
+}
+.sparkle{
+  position:absolute;
+  width:2px;height:2px;
+  background:#ffb6ea;
+  opacity:0.8;
+  border-radius:50%;
+  animation:fall 4s linear infinite;
+}
+@keyframes fall{
+  0%{transform:translateY(-10px) scale(1);}
+  100%{transform:translateY(100vh) scale(0);}
+}
+#content{
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  background:#ffe6f5;
+  min-height:100vh;
+  overflow-y:auto;
+  padding:20px;
+}
+#content img,#content video{
+  max-width:90%;
+  border-radius:12px;
+  margin:10px 0;
+}
+#message{
+  font-size:1.1rem;
+  color:#ff3399;
+  text-align:center;
+  margin:15px;
+  animation:spark 2s infinite alternate;
+  white-space:pre-line;
+}
 </style>
 </head>
 <body>
 
 <div class="spark-text">🎉 Happy Birthday Saniya 💖</div>
+<div class="label">For Saniya 💌</div>
+<div class="subtext">A little surprise inside ✨</div>
+
 <div class="envelope" id="envelope">
   <div class="flap"></div>
 </div>
@@ -106,8 +123,15 @@
   <img src="photo.jpg" alt="Saniya photo">
   <video src="VID-20241216-WA0003.mp4" controls></video>
   <div id="message">
-    Every sparkle reminds me of your light 🌸<br>
-    May your day be filled with love, laughter, and pink skies 💖
+Heeyy Saniya 💖  
+
+It’s been a while since we last talked, and I don’t even know where to start… but I couldn’t let your day pass without doing something special.  
+
+You’ve always had a calm, beautiful energy that lights up small moments. I hope today brings you the same warmth and a little sparkle.  
+
+Happy Birthday Saniya ✨✨  
+
+– With warm wishes, Shivam 💫
   </div>
 </div>
 
@@ -127,11 +151,12 @@ envelope.addEventListener("click",()=>{
   setTimeout(()=>{
     envelope.style.display="none";
     document.querySelector(".spark-text").style.display="none";
+    document.querySelector(".label").style.display="none";
+    document.querySelector(".subtext").style.display="none";
     document.body.style.overflowY="auto";
     content.style.display="flex";
   },1000);
 });
 </script>
-
 </body>
 </html>
