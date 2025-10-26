@@ -2,301 +2,298 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
   <title>✨ Happy Birthday Saniya ✨</title>
-  <meta name="description" content="A sparkly birthday surprise for Saniya — made with love by Shivam" />
   <style>
     :root{
-      --bg1: #fff5fb;
-      --bg2: #fff0f7;
-      --accent: #ff66b3;
-      --accent-2: #ff9acc;
-      --soft: rgba(255,255,255,0.85);
-      --glass: rgba(255,255,255,0.5);
-      --text-dark: #4a303f;
+      --bg1:#fff5fb; --bg2:#fff0f7;
+      --accent:#ff66b3; --accent2:#ff9acc;
+      --text:#4a303f; --elegant:"Georgia","Times New Roman",serif;
+      --ui: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
       --card: #fff;
-      --maxwidth: 820px;
-      --ui: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      --elegant: "Georgia", "Times New Roman", serif;
+      --maxw:900px;
     }
+    html,body{height:100%;margin:0;font-family:var(--ui);background:linear-gradient(180deg,var(--bg1),var(--bg2));color:var(--text);-webkit-font-smoothing:antialiased}
+    main{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:20px;box-sizing:border-box;gap:18px}
 
-    html,body{height:100%;margin:0;font-family:var(--ui);background:linear-gradient(180deg,var(--bg1),var(--bg2));color:var(--text-dark);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-    /* full-screen sparkle overlay */
-    .sparkles {
-      position:fixed; inset:0; pointer-events:none; z-index:60;
-      background-image: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0) 6px),
-                        radial-gradient(circle at 80% 40%, rgba(255,255,255,0.88) 0px, rgba(255,255,255,0) 5px);
+    /* ------- Intro sparkle overlay (ONLY for intro/title) ------- */
+    .intro-overlay {
+      position:fixed; inset:0; z-index:80; pointer-events:none;
+      background: radial-gradient(circle at 10% 20%, rgba(255,250,255,0.6) 0, rgba(255,250,255,0) 20%),
+                  radial-gradient(circle at 80% 60%, rgba(255,240,250,0.6) 0, rgba(255,240,250,0) 18%);
+      transition:opacity .8s ease, visibility .8s;
+      display:flex; justify-content:center; align-items:flex-start; padding-top:8vh;
+    }
+    .intro-overlay.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+
+    /* tiny particle sparkles (subtle) - only in intro overlay */
+    .intro-overlay .stars {
+      position:absolute; inset:0; background-image:
+        radial-gradient(circle at 6% 10%, rgba(255,255,255,1) 0 1.6px, rgba(255,255,255,0) 1.8px),
+        radial-gradient(circle at 14% 40%, rgba(255,235,245,0.98) 0 1.3px, rgba(0,0,0,0) 1.6px),
+        radial-gradient(circle at 75% 30%, rgba(255,250,255,0.95) 0 1.8px, rgba(0,0,0,0) 2px);
+      background-repeat:repeat;
+      opacity:0.95;
+      transform: translateY(0);
+      animation: floatStars 12s linear infinite;
       mix-blend-mode:screen;
-      opacity:1; transition:opacity .9s ease;
+      pointer-events:none;
     }
-    /* animated tiny sparkles using pseudo elements */
-    .sparkles::after {
-      content:"";
-      position:absolute; inset:0;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="1.6" fill="%23ffd7f0" opacity="0.95"/></svg>');
-      background-repeat: repeat;
-      animation: sparkleMove 12s linear infinite;
-      opacity:.95;
-      filter: drop-shadow(0 6px 12px rgba(255,105,180,0.1));
-    }
-    @keyframes sparkleMove { from { transform: translateY(0) } to { transform: translateY(-40px) } }
+    @keyframes floatStars { from{transform:translateY(0)} to{transform:translateY(-35px)} }
 
-    /* container - mobile first */
-    .page {
-      min-height:100vh; display:flex; flex-direction:column; align-items:center; gap:18px;
-      padding:22px 18px 48px; box-sizing:border-box;
-    }
+    /* ----- container cards / sections ----- */
+    .card { width:100%; max-width:var(--maxw); background:var(--card); border-radius:16px; padding:18px; box-shadow:0 10px 30px rgba(120,60,90,0.06); box-sizing:border-box }
+    .center { display:flex; align-items:center; justify-content:center; }
 
-    /* Intro full-screen area */
-    .intro {
-      width:100%; max-width:var(--maxwidth); background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,250,252,0.9));
-      border-radius:18px; padding:28px; display:flex; flex-direction:column; align-items:center; gap:14px;
-      box-shadow: 0 10px 30px rgba(120,60,90,0.08);
-      margin-top:20px;
+    /* Title with animated letter sparkle (only the text) */
+    .title {
+      font-family:var(--elegant); font-size:28px; margin:6px 0 0; letter-spacing:0.6px;
+      background: linear-gradient(90deg,var(--accent),var(--accent2) 60%); -webkit-background-clip:text; color:transparent;
+      position:relative;
+      display:inline-block;
     }
-    .intro h1 { font-family:var(--elegant); font-size:28px; margin:0; letter-spacing:0.4px;
-      background: linear-gradient(90deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; background-clip:text;color:transparent;
+    /* animated shimmer across letters */
+    .title::after{
+      content:""; position:absolute; left:-40%; top:0; width:60%; height:100%;
+      background: linear-gradient(90deg, rgba(255,255,255,0.0), rgba(255,255,255,0.85), rgba(255,255,255,0.0));
+      transform:skewX(-20deg);
+      animation: shimmer 2.6s linear infinite;
+      pointer-events:none;
     }
-    .intro p { margin:0;color:#7b586b }
+    @keyframes shimmer { 0%{left:-60%} 50%{left:120%} 100%{left:240%} }
 
-    /* envelope */
-    .envelope-wrap { width:200px; height:140px; perspective:1000px; display:flex;align-items:center;justify-content:center; }
+    /* little star sparkle near title */
+    .title-star {
+      position:absolute; width:12px; height:12px; border-radius:50%; filter:drop-shadow(0 8px 12px rgba(255,120,170,0.16));
+      background: radial-gradient(circle at 35% 30%, #fff 0 20%, rgba(255,200,240,0) 21%), linear-gradient(135deg,#fff2,#ffd1ea);
+      top:-12px; right:-8px; transform-origin:center; animation: starPulse 1.8s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes starPulse { 0%{transform:scale(.8) rotate(0); opacity:1}50%{transform:scale(1.4) rotate(20deg); opacity:.6}100%{transform:scale(.8) rotate(0); opacity:1} }
+
+    /* ----- envelope ----- */
+    .envelope-wrap{ width:220px; height:150px; perspective:1000px; display:flex; align-items:center; justify-content:center; margin:12px 0 }
     .envelope {
-      width:200px;height:120px;border-radius:12px;background:linear-gradient(180deg,#fff,#fff4fb); position:relative; box-shadow:0 8px 30px rgba(120,60,90,0.08);
-      transform-origin:center center; transition:transform .85s cubic-bezier(.2,.9,.3,1);
-      overflow:visible;
+      width:220px; height:130px; border-radius:12px; position:relative; overflow:visible;
+      background: linear-gradient(180deg,#fff,#fff4fb); box-shadow:0 10px 30px rgba(120,60,90,0.12);
+      transform-origin:center center; transition:transform .8s cubic-bezier(.2,.9,.3,1);
     }
+    /* flap - SOLID and no transparency */
     .flap {
-      position:absolute; left:0; right:0; top:-8px; height:70%; background:linear-gradient(180deg,#ffdff0,#ffd0ea);
-      clip-path: polygon(0 0, 50% 100%, 100% 0); border-radius:12px; display:flex;align-items:center;justify-content:center;
-      font-family:var(--elegant); color:#7a0b45; font-size:18px; transform-origin: top center; transition: transform .9s;
+      position:absolute; left:0; right:0; top:-10px; height:70%;
+      background: linear-gradient(180deg,#ffd6ea,#ffb5d9); border-radius:12px;
+      clip-path: polygon(0 0, 50% 100%, 100% 0);
+      display:flex; align-items:center; justify-content:center;
+      font-family:var(--elegant); color:#6f2340; font-size:18px;
+      transform-origin: top center; transition: transform .9s;
+      z-index:12;
+      box-shadow: 0 8px 20px rgba(120,60,90,0.08);
     }
-    .card-inside { position:absolute; left:8%; right:8%; top:28%; bottom:8%; border-radius:8px; background:linear-gradient(180deg,#fff,#fffafa); display:flex;align-items:center;justify-content:center; flex-direction:column }
-    .open-btn { margin-top:10px;padding:10px 16px;border-radius:999px;border:none;background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:white; font-weight:700; box-shadow:0 8px 20px rgba(255,100,170,0.18) }
+    .card-inside{
+      position:absolute; left:10%; right:10%; top:30%; bottom:10%; border-radius:8px;
+      background: linear-gradient(180deg,#fff,#fffafa); display:flex; align-items:center; justify-content:center; flex-direction:column;
+      z-index:8;
+    }
+    .open-btn{ margin-top:10px; padding:10px 14px; border-radius:999px; border:none; background: linear-gradient(90deg,var(--accent),var(--accent2)); color:white; font-weight:700; box-shadow:0 8px 20px rgba(255,100,170,0.16); }
 
-    /* hidden when opened */
-    .hide { opacity:0; transform: translateY(12px); pointer-events:none; }
+    /* ------- main content sections (hidden until envelope opens) ------- */
+    #stage, #main, #end { display:none; width:100%; max-width:var(--maxw); box-sizing:border-box }
 
-    /* Main sections stacked vertically */
-    .section { width:100%; max-width:var(--maxwidth); background:var(--card); border-radius:16px; padding:18px; box-shadow:0 10px 30px rgba(120,60,90,0.06); display:flex; flex-direction:column; gap:12px; }
-    .center { align-items:center; justify-content:center; display:flex; }
+    /* video area - make sure NO sparkles overlap it (so photos/video stay clean) */
+    .video-wrap{ border-radius:12px; overflow:hidden; background:#000; display:flex; align-items:center; justify-content:center }
+    video{ width:100%; height:auto; max-height:62vh; display:block }
 
-    /* video */
-    .video-wrap { width:100%; border-radius:12px; overflow:hidden; background:#000; display:flex;align-items:center; justify-content:center; }
-    video{ width:100%; height:auto; display:block; max-height:60vh; }
-
-    /* message with typing effect */
+    /* message box */
     .wish {
-      font-family:var(--elegant); font-size:16px; color:#6f3f54; line-height:1.45; white-space:pre-wrap; background: linear-gradient(90deg, rgba(255,255,255,0.75), rgba(255,255,255,0.9));
-      padding:12px;border-radius:12px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+      font-family:var(--elegant); font-size:16px; color:#5a3343; white-space:pre-wrap; padding:12px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,250,252,0.98));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
     }
-    .wish .typing { display:inline-block; border-right:2px solid rgba(255,150,200,0.95); padding-right:4px; animation: blinkCaret .9s step-end infinite; }
-    @keyframes blinkCaret { 50% { border-color: transparent } }
+    .typing-caret { display:inline-block; width:2px; height:1.05em; background:linear-gradient(180deg,#ffb6d9,#ff6fae); margin-left:6px; animation: blink .9s step-end infinite; vertical-align:bottom }
+    @keyframes blink { 50% { opacity:0 } }
 
-    /* gallery photos */
-    .gallery { display:flex; gap:10px; flex-wrap:nowrap; width:100%; justify-content:space-between; }
-    .gallery img { width:48%; height:auto; border-radius:12px; object-fit:cover; box-shadow:0 10px 30px rgba(120,60,90,0.06) }
+    /* gallery */
+    .gallery { display:flex; gap:10px; margin-top:8px; }
+    .gallery img { width:48%; border-radius:12px; object-fit:cover; box-shadow:0 10px 30px rgba(120,60,90,0.06) }
 
-    /* footer */
-    .footer { font-size:14px; color:#7b586b; text-align:center; padding:8px 0; }
+    /* end */
+    .end { text-align:center; font-family:var(--elegant); color:#6f2340; font-size:17px; padding:12px 0 }
 
-    /* small screen tweaks */
+    /* responsive */
     @media (max-width:480px){
-      .intro h1 { font-size:24px }
-      .envelope-wrap { width:170px; height:110px }
-      .open-btn { padding:8px 14px }
-      .gallery img { width:48% }
+      .title{font-size:22px}
+      .envelope-wrap{ width:190px; height:120px }
+      .open-btn{ padding:8px 12px }
+      .gallery img{ width:48% }
     }
-
   </style>
 </head>
 <body>
-  <!-- YouTube embed used to play Those Eyes (autoplay & loop). If autoplay is blocked by browser, user can press play. -->
-  <!-- Video id used: b_CpWmkhwq0 (official upload). Autoplay is requested below. Source: YouTube official upload. :contentReference[oaicite:1]{index=1} -->
-  <iframe id="yt-player" width="1" height="1" src="https://www.youtube.com/embed/b_CpWmkhwq0?autoplay=1&loop=1&playlist=b_CpWmkhwq0&controls=0&iv_load_policy=3&rel=0&modestbranding=1"
-    allow="autoplay; encrypted-media" style="display:block;position:fixed;left:-9999px;top:-9999px" aria-hidden="true"></iframe>
+  <!-- YouTube audio embed (requests autoplay). If blocked, tapping the page will allow audio -->
+  <iframe id="yt-player" src="https://www.youtube.com/embed/b_CpWmkhwq0?autoplay=1&loop=1&playlist=b_CpWmkhwq0&controls=0&mute=0&modestbranding=1"
+    allow="autoplay; encrypted-media" style="position:fixed;left:-9999px;top:-9999px" aria-hidden="true"></iframe>
 
-  <div class="sparkles" id="sparkles"></div>
+  <!-- intro sparkle overlay (only visible until envelope opened) -->
+  <div class="intro-overlay" id="introOverlay" aria-hidden="false">
+    <div class="stars" aria-hidden="true"></div>
+  </div>
 
-  <main class="page" id="pageRoot">
-    <!-- Intro + envelope -->
-    <section class="intro center" id="introSection">
-      <h1>✨ Happy Birthday Saniya ✨</h1>
-      <p>Tap to open 💌</p>
+  <main>
+    <!-- Intro card -->
+    <section class="card center" style="flex-direction:column; gap:8px;">
+      <div style="position:relative; display:inline-block">
+        <div class="title">✨ Happy Birthday Saniya ✨</div>
+        <div class="title-star" aria-hidden="true"></div>
+      </div>
+      <div style="color:#7b586b; font-size:14px">Tap to open 💌</div>
 
-      <div class="envelope-wrap center" role="button" tabindex="0" aria-label="Open envelope" id="envelopeWrap">
+      <div class="envelope-wrap" id="envelopeWrap" role="button" tabindex="0" aria-label="Open the envelope">
         <div class="envelope" id="envelope">
           <div class="flap" id="flap">For Saniya 💖</div>
           <div class="card-inside">
-            <div style="font-family:var(--elegant);color:#7a0b45">A little surprise</div>
+            <div style="font-family:var(--elegant); color:#7a0b45">A little surprise</div>
             <button class="open-btn" id="openBtn">Open</button>
           </div>
         </div>
       </div>
-      <div style="font-size:13px;color:#7a586b">Tip: If music doesn't start, tap the page once to allow audio.</div>
+      <div style="font-size:13px;color:#7a586b">If music doesn't start, tap the screen once to allow audio.</div>
     </section>
 
-    <!-- Reveal / Stage -->
-    <section class="section center" id="stageSection" style="display:none;">
-      <div style="width:100%;display:flex;flex-direction:column;gap:12px">
-        <div class="center" style="flex-direction:column;gap:10px">
-          <div style="font-family:var(--elegant);font-size:20px;color:#7a0b45">Your surprise</div>
-          <div style="color:#6f3f54;font-size:14px">Lights, a memory and a little message ❤️</div>
-        </div>
+    <!-- Stage (lights/soft reveal) -->
+    <section id="stage" class="card" aria-hidden="true">
+      <div class="center" style="flex-direction:column; gap:8px">
+        <div style="font-family:var(--elegant); color:#7a0b45; font-size:18px">Your surprise</div>
+        <div style="color:#6f3f54">Lights, a memory and a little message ❤️</div>
       </div>
     </section>
 
     <!-- Main vertical content: video → message → photos -->
-    <section class="section" id="mainSection" style="display:none;">
-      <div class="center" style="flex-direction:column;gap:12px">
-        <!-- video embed (local file) -->
-        <div class="video-wrap" id="videoWrap">
+    <section id="main" class="card" aria-hidden="true">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <!-- Video: local file -->
+        <div class="video-wrap" id="videoWrap" aria-hidden="false">
           <video id="mainVideo" playsinline webkit-playsinline controls preload="metadata" loop>
             <source src="video.mp4" type="video/mp4">
-            Your browser doesn't support HTML5 video — make sure 'video.mp4' is present.
+            Your browser doesn't support HTML5 video — ensure 'video.mp4' is present.
           </video>
         </div>
 
-        <!-- message -->
+        <!-- Message -->
         <div class="wish" id="wishBox" aria-live="polite">
-          <!-- the typed message will be inserted here by JS -->
-          <span id="typedText"></span><span class="typing" id="typingCaret"></span>
+          <span id="typedText"></span><span class="typing-caret" id="caret"></span>
         </div>
 
-        <!-- gallery -->
-        <div class="gallery" id="galleryArea">
+        <!-- Photos gallery -->
+        <div class="gallery" id="gallery">
           <img src="photo1.jpg" alt="photo 1" id="p1">
           <img src="photo2.jpg" alt="photo 2" id="p2">
         </div>
       </div>
     </section>
 
-    <!-- end -->
-    <section class="section center" id="endSection" style="display:none;">
-      <div style="text-align:center">
-        <div style="font-family:var(--elegant);font-size:18px;color:#7a0b45">Made with love by Shivam 💕</div>
-      </div>
+    <!-- End -->
+    <section id="end" class="card end" aria-hidden="true">
+      Made with love by Shivam 💕
     </section>
-
-    <div class="footer">If anything needs adjusting — photos, text or music — I can update it for you.</div>
   </main>
 
   <script>
-    // --- variables & elements
+    // elements
+    const introOverlay = document.getElementById('introOverlay');
+    const envelopeWrap = document.getElementById('envelopeWrap');
     const flap = document.getElementById('flap');
     const envelope = document.getElementById('envelope');
     const openBtn = document.getElementById('openBtn');
-    const envelopeWrap = document.getElementById('envelopeWrap');
-    const introSection = document.getElementById('introSection');
-    const stageSection = document.getElementById('stageSection');
-    const mainSection = document.getElementById('mainSection');
-    const endSection = document.getElementById('endSection');
-    const sparkles = document.getElementById('sparkles');
+    const stage = document.getElementById('stage');
+    const main = document.getElementById('main');
+    const end = document.getElementById('end');
     const typedTextEl = document.getElementById('typedText');
-    const typingCaret = document.getElementById('typingCaret');
+    const caret = document.getElementById('caret');
     const video = document.getElementById('mainVideo');
 
-    // message content (gentle, thoughtful)
-    const message = `Hey Saniya,\n\nIt’s been a while since we last talked, and I don’t even know where to start... but I couldn’t let your day pass without doing something special.\n\nYou’ve always had a calm, beautiful energy that lights up even small moments. I hope today brings you the same warmth and a little sparkle.\n\nHappy Birthday, Saniya ✨\n\n— With warm wishes, Shivam`;
+    // the single message (no duplicates)
+    const message = `Hey Saniya,\n\nIt’s been a while since we last talked, and I don’t even know where to start... but I couldn’t let your day pass without doing something special.\n\nYou’ve always had a calm, beautiful energy that lights up small moments. I hope today brings you the same warmth and a little sparkle.\n\nHappy Birthday, Saniya ✨\n\n— With warm wishes, Shivam`;
 
     // typing effect
-    function typeMessage(text, el, speed=18) {
+    function typeText(text, el, speed=16){
       let i = 0;
       el.textContent = '';
+      caret.style.display = 'inline-block';
       function step(){
-        if(i <= text.length - 1){
+        if(i < text.length){
           el.textContent += text[i++];
-          // scroll wish box a bit if long
+          // keep caret visible and scroll if needed
           el.parentElement.scrollTop = el.parentElement.scrollHeight;
           setTimeout(step, speed);
         } else {
-          typingCaret.style.display = 'none';
+          caret.style.display = 'none';
         }
       }
       step();
     }
 
-    // envelope open animation & reveal
-    function revealAll(){
-      // flap open
-      flap.style.transform = 'rotateX(180deg) translateY(-8px)';
-      envelope.style.transform = 'translateY(-16px) scale(.98)';
+    // open envelope -> reveal content
+    function openEnvelope(){
+      // flap open animation
+      flap.style.transform = 'rotateX(180deg) translateY(-6px)';
+      envelope.style.transform = 'translateY(-12px) scale(.985)';
+      // hide intro overlay after a short delay so sparkles don't cover media
       setTimeout(()=> {
-        // fade intro and show main sections sequentially
-        introSection.style.transition = 'opacity .6s ease, transform .6s ease';
-        introSection.style.opacity = '0';
-        introSection.style.transform = 'translateY(-18px)';
-        setTimeout(()=> { introSection.style.display = 'none'; }, 650);
+        introOverlay.classList.add('hidden');
+      }, 650);
 
-        // show stage (lights)
-        stageSection.style.display = 'flex';
+      // hide intro card visually by sliding it up a bit (optional)
+      setTimeout(()=> {
+        // show stage then main content sequentially
+        stage.style.display = 'block';
+        stage.setAttribute('aria-hidden','false');
         setTimeout(()=> {
-          mainSection.style.display = 'flex';
-          // typing the message
-          typeMessage(message, typedTextEl, 16);
-
-          // show end after a delay
+          main.style.display = 'block';
+          main.setAttribute('aria-hidden','false');
+          // start typing message
+          typeText(message, typedTextEl, 16);
+          // show end later
           setTimeout(()=> {
-            endSection.style.display = 'flex';
-            // soften sparkles but keep small shimmer
-            sparkles.style.opacity = '0.9';
-          }, 1800);
-        }, 500);
+            end.style.display = 'block';
+            end.setAttribute('aria-hidden','false');
+          }, 1600);
+        }, 700);
       }, 900);
 
-      // try to play the YouTube player by focusing it (browsers may still block autoplay on mobile)
-      try {
-        const yt = document.getElementById('yt-player');
-        yt.contentWindow && yt.focus && yt.focus();
-      } catch(e){ /* ignore */ }
-
-      // ensure the local video is visible & try to play (some mobile browsers require user gesture)
-      setTimeout(()=> {
-        try { video.play().catch(()=>{}); } catch(e){}
-      }, 1000);
+      // attempt to play embedded audio and local video (video may require user interaction on mobile)
+      try { document.getElementById('yt-player').contentWindow && document.getElementById('yt-player').contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*'); } catch(e){}
+      setTimeout(()=> { try { video.play().catch(()=>{}); } catch(e){} }, 900);
     }
 
-    // click handlers
-    openBtn.addEventListener('click', revealAll);
-    envelopeWrap.addEventListener('click', revealAll);
-    envelopeWrap.addEventListener('keypress', (e)=> { if(e.key === 'Enter') revealAll(); });
+    // attach handlers
+    openBtn.addEventListener('click', openEnvelope);
+    envelopeWrap.addEventListener('click', openEnvelope);
+    envelopeWrap.addEventListener('keypress', (e)=> { if(e.key === 'Enter' || e.key === ' ') openEnvelope(); });
 
-    // attempt autoplay on page load for YouTube (may be blocked)
-    window.addEventListener('load', ()=> {
-      // small hint: on mobile autoplay is often blocked until user interacts. We still request autoplay via the embed.
-      // for best results, the user can tap the intro envelope which is already the intended flow.
-      // keep sparkles strong until envelope is opened
-      sparkles.style.opacity = '1';
-      // auto-open audio focus attempt
-      setTimeout(()=> {
-        try { document.getElementById('yt-player').contentWindow && document.getElementById('yt-player').contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*'); } catch(e){}
-      }, 700);
+    // helper: if photos missing, insert placeholder
+    ['p1','p2'].forEach(id=>{
+      const img = document.getElementById(id);
+      img.addEventListener('error', ()=> {
+        img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420"><rect width="100%" height="100%" fill="%23ffeef8"/><text x="50%" y="50%" text-anchor="middle" alignment-baseline="middle" fill="%237a0b45" font-size="20">Photo not found</text></svg>';
+      });
     });
 
-    // accessibility: allow space to open
-    document.addEventListener('keydown', (e)=> { if(e.key === ' ' || e.key === 'Enter') { if(window.getComputedStyle(introSection).display !== 'none') revealAll(); } });
-
-    // small progressive enhancement: if photos aren't present, replace with placeholders
-    function checkImages(){
-      ['p1','p2'].forEach(id=>{
-        const el = document.getElementById(id);
-        el.addEventListener('error', ()=> {
-          el.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><rect width="100%" height="100%" fill="%23ffeef8"/><text x="50%" y="50%" fill="%237a0b45" font-size="18" text-anchor="middle" alignment-baseline="middle">Photo not found</text></svg>';
-        });
-      });
-    }
-    checkImages();
-
-    // make the page mobile-friendly fit
-    (function ensureMobile(){
-      // try to make video fit height nicely on phones
-      function adapt(){
-        const vh = window.innerHeight * 0.6;
-        video.style.maxHeight = (vh) + 'px';
+    // small mobile fit for video
+    (function adapt(){
+      function setMaxVideoHeight(){
+        const vh = window.innerHeight * 0.62;
+        video.style.maxHeight = vh + 'px';
       }
-      window.addEventListener('resize', adapt);
-      adapt();
+      window.addEventListener('resize', setMaxVideoHeight);
+      setMaxVideoHeight();
     })();
+
+    // accessibility: allow space / enter anywhere to open if on intro
+    document.addEventListener('keydown', (e)=> {
+      if((e.key === ' ' || e.key === 'Enter') && introOverlay && !introOverlay.classList.contains('hidden')){
+        e.preventDefault();
+        openEnvelope();
+      }
+    });
   </script>
 </body>
 </html>
