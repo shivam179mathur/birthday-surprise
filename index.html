@@ -3,135 +3,162 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Spark for Saniya 💖</title>
+<title>Happy Birthday Saniya 💖</title>
 <style>
-  body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: radial-gradient(circle, #ffe6f2, #ffb6c1);
-    overflow-x: hidden;
-    color: #ff4fa3;
-  }
-  .sparkle-text {
-    font-size: 2em;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 120px;
-    animation: sparkle 1.5s infinite alternate;
-  }
-  @keyframes sparkle {
-    0% { text-shadow: 0 0 10px #ff4fa3, 0 0 20px #ffb6c1; }
-    100% { text-shadow: 0 0 20px #fff, 0 0 40px #ff69b4; }
-  }
-  .envelope-container {
-    text-align: center;
-    margin-top: 80px;
-  }
-  .envelope {
-    position: relative;
-    display: inline-block;
-    width: 200px;
-    height: 120px;
-    background: #ffb6c1;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out;
-    box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
-  }
-  .flap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60%;
-    background: #ff69b4;
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
-    transform-origin: top;
-    transition: transform 0.7s ease-in-out;
-  }
-  .flap-text {
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-weight: bold;
-  }
-  .envelope.open .flap {
-    transform: rotateX(180deg);
-  }
-  .content {
-    display: none;
-    text-align: center;
-    margin: 40px 20px;
-    animation: fadeIn 2s ease-in;
-  }
-  .content.show {
-    display: block;
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  video {
-    max-width: 90%;
-    margin-top: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 10px #ff69b4;
-  }
-  img {
-    width: 85%;
-    border-radius: 15px;
-    margin-top: 20px;
-    box-shadow: 0 0 10px #ff69b4;
-  }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{
+  background:#000;
+  overflow:hidden;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+.spark-text{
+  font-size:2rem;
+  color:#ffb6ea;
+  text-align:center;
+  animation:spark 2s infinite alternate;
+  margin-bottom:15px;
+}
+@keyframes spark{
+  from{text-shadow:0 0 5px #ff66c4,0 0 10px #ff99dd;}
+  to{text-shadow:0 0 20px #ffb6ea,0 0 40px #ff66c4;}
+}
+.envelope{
+  position:relative;
+  width:250px;
+  height:150px;
+  background:#ff66c4;
+  border-radius:10px;
+  cursor:pointer;
+  transition:transform 1s ease;
+}
+.flap{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:#ff99dd;
+  clip-path:polygon(0 0,100% 0,50% 50%);
+  transform-origin:top;
+  transition:transform 1s ease;
+}
+.envelope.open .flap{transform:rotateX(180deg);}
+.label{
+  color:#fff;
+  text-align:center;
+  font-weight:600;
+  margin-bottom:8px;
+  font-size:1.2rem;
+  letter-spacing:1px;
+}
+.subtext{
+  color:#ffd6f5;
+  text-align:center;
+  margin-bottom:15px;
+  font-size:1rem;
+}
+.sparkles{
+  position:fixed;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:-1;
+}
+.sparkle{
+  position:absolute;
+  width:2px;height:2px;
+  background:#ffb6ea;
+  opacity:0.8;
+  border-radius:50%;
+  animation:fall 4s linear infinite;
+}
+@keyframes fall{
+  0%{transform:translateY(-10px) scale(1);}
+  100%{transform:translateY(100vh) scale(0);}
+}
+#content{
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  background:#ffe6f5;
+  min-height:100vh;
+  overflow-y:auto;
+  padding:20px;
+}
+#content img,#content video{
+  max-width:90%;
+  border-radius:12px;
+  margin:10px 0;
+  box-shadow:0 0 10px rgba(255,105,180,0.4);
+}
+#message{
+  font-size:1.1rem;
+  color:#ff3399;
+  text-align:center;
+  margin:15px;
+  animation:spark 2s infinite alternate;
+  white-space:pre-line;
+}
 </style>
 </head>
 <body>
-  <audio id="bg-music" autoplay loop>
-    <source src="https://www.youtube.com/embed/dmrJU4QP2Gc?start=72&autoplay=1" type="audio/mpeg">
-  </audio>
 
-  <div class="sparkle-text">🎉 Happy Birthday Saniya 💖</div>
-  <div class="envelope-container">
-    <div class="envelope" id="envelope">
-      <div class="flap" id="flap"></div>
-      <div class="flap-text">Tap to open 💌</div>
-    </div>
+<div class="spark-text">🎉 Happy Birthday Saniya 💖</div>
+<div class="label">For Saniya 💌</div>
+<div class="subtext">A little surprise inside ✨</div>
+
+<div class="envelope" id="envelope">
+  <div class="flap"></div>
+</div>
+
+<div class="sparkles" id="sparkles"></div>
+
+<audio id="bgm" autoplay loop>
+  <source src="VID-20241216-WA0003.mp4" type="audio/mp4">
+</audio>
+
+<div id="content">
+  <img src="photo1.jpg" alt="Saniya photo 1">
+  <img src="photo2.jpg" alt="Saniya photo 2">
+  <video src="VID-20241216-WA0003.mp4" controls></video>
+  <div id="message">
+Heeyy Saniya 💖  
+
+It’s been a while since we last talked, and I don’t even know where to start… but I couldn’t let your day pass without doing something special.  
+
+You’ve always had a calm, beautiful energy that lights up small moments. I hope today brings you the same warmth and a little sparkle.  
+
+Happy Birthday Saniya ✨✨  
+
+– With warm wishes, Shivam 💫
   </div>
-
-  <div class="content" id="content">
-    <p style="font-size:1.2em; line-height:1.6;">
-      Heeyy Saniya 💖<br><br>
-      It’s been a while since we last talked, and I don’t even know where to start...<br>
-      but I couldn’t let your day pass without doing something special.<br><br>
-      You’ve always had this calm, beautiful energy that lights up every small moment.<br>
-      I hope today brings you the same warmth, joy, and a little sparkle ✨<br><br>
-      Happy Birthday, Saniya 💫<br><br>
-      — With warmth, Shivam 💌
-    </p>
-
-    <video autoplay muted playsinline loop>
-      <source src="VID-20241216-WA0003.mp4" type="video/mp4">
-    </video>
-
-    <img src="saniya1.jpg" alt="Saniya photo 1" />
-    <img src="saniya2.jpg" alt="Saniya photo 2" />
-  </div>
+</div>
 
 <script>
-  const envelope = document.getElementById("envelope");
-  const content = document.getElementById("content");
-  const flap = document.getElementById("flap");
-  const music = document.getElementById("bg-music");
-
-  envelope.addEventListener("click", () => {
-    envelope.classList.add("open");
-    setTimeout(() => {
-      content.classList.add("show");
-      music.play().catch(() => {});
-    }, 800);
-  });
+const envelope=document.getElementById("envelope");
+const content=document.getElementById("content");
+const sparkles=document.getElementById("sparkles");
+for(let i=0;i<80;i++){
+  const s=document.createElement("div");
+  s.className="sparkle";
+  s.style.left=Math.random()*100+"%";
+  s.style.animationDelay=Math.random()*4+"s";
+  sparkles.appendChild(s);
+}
+envelope.addEventListener("click",()=>{
+  envelope.classList.add("open");
+  setTimeout(()=>{
+    envelope.style.display="none";
+    document.querySelector(".spark-text").style.display="none";
+    document.querySelector(".label").style.display="none";
+    document.querySelector(".subtext").style.display="none";
+    document.body.style.overflowY="auto";
+    content.style.display="flex";
+  },1000);
+});
 </script>
 </body>
 </html>
