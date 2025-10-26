@@ -102,8 +102,6 @@ body{
   animation:spark 2s infinite alternate;
   white-space:pre-line;
 }
-
-/* CHANGE 1: Added this CSS to hide the YouTube player */
 #player {
   position: absolute;
   top: -9999px;
@@ -126,9 +124,6 @@ body{
 <div id="player"></div>
 
 <div id="content">
-  <img src="photo1.jpg" alt="Saniya photo 1">
-  <img src="photo2.jpg" alt="Saniya photo 2">
-  <video src="VID-20241216-WA0003.mp4" controls></video>
   <div id="message">
 Heeyy Saniya 💖  
 
@@ -140,8 +135,11 @@ Happy Birthday Saniya ✨✨
 
 – With warm wishes, Shivam 💫
   </div>
+  
+  <video src="VID-20241216-WA0003.mp4" controls></video>
+  <img src="photo1.jpg" alt="Saniya photo 1">
+  <img src="photo2.jpg" alt="Saniya photo 2">
 </div>
-
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
@@ -170,14 +168,11 @@ function onYouTubeIframeAPIReady() {
   });
 }
 
-// This function is called when the player is ready
 function onPlayerReady(event) {
   // Player is loaded, but we wait for the user click
 }
 
-// This function is called when the video ends
 function onPlayerStateChange(event) {
-  // If the video has finished (state 0)
   if (event.data == YT.PlayerState.ENDED) {
     player.seekTo(81, true); // Loop back to 1:21 and play again
   }
@@ -196,12 +191,10 @@ for(let i=0;i<80;i++){
 
 // MODIFIED click event
 envelope.addEventListener("click",()=>{
-  // Start playing the music
   if (player && typeof player.playVideo === 'function') {
     player.playVideo();
   }
 
-  // Original envelope animation
   envelope.classList.add("open");
   setTimeout(()=>{
     envelope.style.display="none";
