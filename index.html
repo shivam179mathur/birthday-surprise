@@ -102,6 +102,13 @@ body{
   animation:spark 2s infinite alternate;
   white-space:pre-line;
 }
+
+/* CHANGE 1: Added this CSS to hide the YouTube player */
+#player {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
 </style>
 </head>
 <body>
@@ -115,6 +122,8 @@ body{
 </div>
 
 <div class="sparkles" id="sparkles"></div>
+
+<div id="player"></div>
 
 <div id="content">
   <img src="photo1.jpg" alt="Saniya photo 1">
@@ -133,10 +142,50 @@ Happy Birthday Saniya ✨✨
   </div>
 </div>
 
+<script src="https://www.youtube.com/iframe_api"></script>
+
 <script>
 const envelope=document.getElementById("envelope");
 const content=document.getElementById("content");
 const sparkles=document.getElementById("sparkles");
+
+// --- YouTube Player Code ---
+var player;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    height: '0',
+    width: '0',
+    videoId: 'dmrJU4QP2Gc', // The Video ID from the URL
+    playerVars: {
+      'autoplay': 0,      // Can't autoplay, will play on click
+      'controls': 0,      // No controls
+      'start': 81,        // Start at 1 min 21 sec (81 seconds)
+      'disablekb': 1,     // Disable keyboard
+      'iv_load_policy': 3 // Hide annotations
+    },
+    events: {
+      'onReady': onPlayerReady,
+      'onStateChange': onPlayerStateChange
+    }
+  });
+}
+
+// This function is called when the player is ready
+function onPlayerReady(event) {
+  // Player is loaded, but we wait for the user click
+}
+
+// This function is called when the video ends
+function onPlayerStateChange(event) {
+  // If the video has finished (state 0)
+  if (event.data == YT.PlayerState.ENDED) {
+    player.seekTo(81, true); // Loop back to 1:21 and play again
+  }
+}
+// --- End of YouTube Player Code ---
+
+
+// Create sparkles
 for(let i=0;i<80;i++){
   const s=document.createElement("div");
   s.className="sparkle";
@@ -145,33 +194,15 @@ for(let i=0;i<80;i++){
   sparkles.appendChild(s);
 }
 
-// This 'click' event listener is now updated
+// MODIFIED click event
 envelope.addEventListener("click",()=>{
-  envelope.classList.add("open");
-  
-  // --- START: Added code for YouTube BGM ---
-  // Create an iframe element
-  const iframe = document.createElement('iframe');
-  
-  // Hide the iframe so it plays in the background
-  iframe.style.display = 'none'; 
-  
-  // Set the YouTube embed URL with all parameters:
-  // videoId = dmrJU4QP2Gc
-  // autoplay=1 (starts playing on load)
-  // start=80 (starts at 1 min 20 sec)
-  // loop=1 (loops the video)
-  // playlist=dmrJU4QP2Gc (required for loop=1 to work)
-  // controls=0 (hides player controls)
-  iframe.src = "https://www.youtube.com/embed/dmrJU4QP2Gc?autoplay=1&start=80&loop=1&playlist=dmrJU4QP2Gc&controls=0";
-  
-  // Allow autoplay
-  iframe.allow = "autoplay";
-  
-  // Add the iframe to the page, which will trigger the autoplay
-  document.body.appendChild(iframe);
-  // --- END: Added code for YouTube BGM ---
+  // Start playing the music
+  if (player && typeof player.playVideo === 'function') {
+    player.playVideo();
+  }
 
+  // Original envelope animation
+  envelope.classList.add("open");
   setTimeout(()=>{
     envelope.style.display="none";
     document.querySelector(".spark-text").style.display="none";
