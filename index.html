@@ -102,11 +102,13 @@ body{
   animation:spark 2s infinite alternate;
   white-space:pre-line;
 }
-#player {
+/* This style is no longer needed */
+/* #player {
   position: absolute;
   top: -9999px;
   left: -9999px;
-}
+} 
+*/
 </style>
 </head>
 <body>
@@ -121,7 +123,11 @@ body{
 
 <div class="sparkles" id="sparkles"></div>
 
-<div id="player"></div>
+<audio id="birthday-music" loop>
+  <source src="aud1.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
 
 <div id="content">
   <div id="message">
@@ -142,48 +148,14 @@ Happy Birthday Saniya ✨✨
 </div>
 
 
-<script src="https://www.youtube.com/iframe_api"></script>
-
 <script>
 const envelope=document.getElementById("envelope");
 const content=document.getElementById("content");
 const sparkles=document.getElementById("sparkles");
+// *** Get the new audio element ***
+const music = document.getElementById("birthday-music"); 
 
-// --- YouTube Player Code ---
-var player;
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('player', {
-    height: '0',
-    width: '0',
-    // *** CHANGED: Using official lyric video ID ***
-    videoId: 'cvUAzpn48xA', 
-    playerVars: {
-      'autoplay': 0,      // Can't autoplay, will play on click
-      'controls': 0,      // No controls
-      // *** CHANGED: Start at 1 min 22 sec (82 seconds) ***
-      'start': 82,        
-      'disablekb': 1,     // Disable keyboard
-      'iv_load_policy': 3 // Hide annotations
-    },
-    events: {
-      'onReady': onPlayerReady,
-      'onStateChange': onPlayerStateChange
-    }
-  });
-}
-
-function onPlayerReady(event) {
-  // Player is loaded, but we wait for the user click
-}
-
-function onPlayerStateChange(event) {
-  if (event.data == YT.PlayerState.ENDED) {
-    // *** CHANGED: Loop back to 1:22 ***
-    player.seekTo(82, true); 
-  }
-}
-// --- End of YouTube Player Code ---
-
+// --- YouTube Player Code Removed ---
 
 // Create sparkles
 for(let i=0;i<80;i++){
@@ -194,12 +166,13 @@ for(let i=0;i<80;i++){
   sparkles.appendChild(s);
 }
 
-// Click event
+// *** MODIFIED click event ***
 envelope.addEventListener("click",()=>{
-  if (player && typeof player.playVideo === 'function') {
-    player.playVideo();
-  }
+  // Play the local audio file
+  music.currentTime = 82; // Start at 1 min 22 sec (82 seconds)
+  music.play();
 
+  // Original envelope animation
   envelope.classList.add("open");
   setTimeout(()=>{
     envelope.style.display="none";
