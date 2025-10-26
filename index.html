@@ -1,107 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Saniya 🎂</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Spark for Saniya 💖</title>
 <style>
   body {
     margin: 0;
-    padding: 0;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-    text-align: center;
+    background: radial-gradient(circle, #ffe6f2, #ffb6c1);
     overflow-x: hidden;
-    color: #333;
+    color: #ff4fa3;
   }
-  h1 {
-    margin-top: 40px;
-    font-size: 2.5em;
-    color: #ff5e7e;
-    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8);
-    animation: fadeIn 2s ease-in-out;
+  .sparkle-text {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 120px;
+    animation: sparkle 1.5s infinite alternate;
   }
-  p {
-    width: 90%;
-    max-width: 600px;
-    margin: 20px auto;
-    line-height: 1.7;
-    font-size: 1.1em;
-    animation: slideUp 2s ease-in-out;
+  @keyframes sparkle {
+    0% { text-shadow: 0 0 10px #ff4fa3, 0 0 20px #ffb6c1; }
+    100% { text-shadow: 0 0 20px #fff, 0 0 40px #ff69b4; }
   }
-  video {
-    width: 90%;
-    max-width: 600px;
-    margin-top: 30px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(255, 94, 126, 0.5);
-    animation: zoomIn 2s ease-in-out;
+  .envelope-container {
+    text-align: center;
+    margin-top: 80px;
   }
-  .photo-gallery {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 40px;
+  .envelope {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    height: 120px;
+    background: #ffb6c1;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
   }
-  .photo-gallery img {
-    width: 80%;
-    max-width: 500px;
-    margin: 15px 0;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(255, 94, 126, 0.5);
-    animation: fadeIn 3s ease-in-out;
+  .flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: #ff69b4;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top;
+    transition: transform 0.7s ease-in-out;
   }
-  footer {
-    margin: 50px 0 20px;
-    font-size: 1.2em;
-    color: #444;
-    animation: fadeIn 3s ease-in-out;
+  .flap-text {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+  }
+  .envelope.open .flap {
+    transform: rotateX(180deg);
+  }
+  .content {
+    display: none;
+    text-align: center;
+    margin: 40px 20px;
+    animation: fadeIn 2s ease-in;
+  }
+  .content.show {
+    display: block;
   }
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
+  video {
+    max-width: 90%;
+    margin-top: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px #ff69b4;
   }
-  @keyframes zoomIn {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+  img {
+    width: 85%;
+    border-radius: 15px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px #ff69b4;
   }
 </style>
 </head>
 <body>
+  <audio id="bg-music" autoplay loop>
+    <source src="https://www.youtube.com/embed/dmrJU4QP2Gc?start=72&autoplay=1" type="audio/mpeg">
+  </audio>
 
-<h1>Heeyy Saaniya 💖</h1>
-<p>
-It’s been a while since we last talked, and I don’t even know where to start...  
-but I couldn’t let your day pass without doing something special.  
-You’ve always had a calm, beautiful energy that lights up small moments.  
-I hope today brings you the same warmth and a little sparkle.  
-</p>
-<h1>Happy Birthday, Saaniya ✨</h1>
-<footer>— With warm wishes, Shivam</footer>
+  <div class="sparkle-text">🎉 Happy Birthday Saniya 💖</div>
+  <div class="envelope-container">
+    <div class="envelope" id="envelope">
+      <div class="flap" id="flap"></div>
+      <div class="flap-text">Tap to open 💌</div>
+    </div>
+  </div>
 
-<!-- Video (autoplay, muted, loop) -->
-<video autoplay muted loop playsinline>
-  <source src="video.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+  <div class="content" id="content">
+    <p style="font-size:1.2em; line-height:1.6;">
+      Heeyy Saniya 💖<br><br>
+      It’s been a while since we last talked, and I don’t even know where to start...<br>
+      but I couldn’t let your day pass without doing something special.<br><br>
+      You’ve always had this calm, beautiful energy that lights up every small moment.<br>
+      I hope today brings you the same warmth, joy, and a little sparkle ✨<br><br>
+      Happy Birthday, Saniya 💫<br><br>
+      — With warmth, Shivam 💌
+    </p>
 
-<!-- Background Music (starts at 1:12 from YouTube) -->
-<iframe 
-  width="0" height="0"
-  src="https://www.youtube.com/embed/dmrJU4QP2Gc?start=72&autoplay=1&loop=1&playlist=dmrJU4QP2Gc"
-  frameborder="0"
-  allow="autoplay">
-</iframe>
+    <video autoplay muted playsinline loop>
+      <source src="VID-20241216-WA0003.mp4" type="video/mp4">
+    </video>
 
-<!-- Photos placed at the END -->
-<div class="photo-gallery">
-  <img src="photo1.jpg" alt="Saniya Pic 1">
-  <img src="photo2.jpg" alt="Saniya Pic 2">
-</div>
+    <img src="saniya1.jpg" alt="Saniya photo 1" />
+    <img src="saniya2.jpg" alt="Saniya photo 2" />
+  </div>
 
+<script>
+  const envelope = document.getElementById("envelope");
+  const content = document.getElementById("content");
+  const flap = document.getElementById("flap");
+  const music = document.getElementById("bg-music");
+
+  envelope.addEventListener("click", () => {
+    envelope.classList.add("open");
+    setTimeout(() => {
+      content.classList.add("show");
+      music.play().catch(() => {});
+    }, 800);
+  });
+</script>
 </body>
 </html>
